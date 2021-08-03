@@ -159,7 +159,8 @@
                                   Name="guide_step6" HorizontalAlignment="Left" VerticalAlignment="Top"
                                FontFamily="Champagne &amp;Limousines" 
                                FontSize="11" Margin="0,0,0,3"  Foreground="#264653"/>
-
+                        <TextBox Width="0" Height="0" Name="txt_sensornum_temp" Background="Transparent" 
+                                 VerticalAlignment="Center" TextAlignment="Center"></TextBox>
                     </StackPanel>
                     
                     <StackPanel Orientation="Horizontal">

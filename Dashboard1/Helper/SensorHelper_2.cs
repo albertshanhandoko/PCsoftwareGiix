@@ -4052,6 +4052,30 @@ namespace Dashboard1.Helper
             */
             #endregion
 
+            #region thereshold
+            List<SQL_Data_Config> List_Data_Configs = new List<SQL_Data_Config> { };
+            List_Data_Configs = Sensor_input_Helper.MySql_Get_DataConfig(batch_data.ipaddress_cls);
+
+            var thereshold_Max_var = List_Data_Configs.Find(item => item.Config_Param == "Thereshold_Max").Config_Value;
+            var thereshold_Min_var = List_Data_Configs.Find(item => item.Config_Param == "Thereshold_Min").Config_Value;
+
+            double thereshold_Max = double.Parse(thereshold_Max_var.ToString());
+            double thereshold_Min = double.Parse(thereshold_Min_var.ToString());
+
+            //var theresholdmax = 
+            //ListFilesToProcess.Count(item => item.IsChecked);
+            double number_of_thereshold_max = batch_data.List_Measure_Result.Count(item => item.measure_result_cls > thereshold_Max);
+            double number_of_thereshold_min = batch_data.List_Measure_Result.Count(item => item.measure_result_cls < thereshold_Min);
+
+            sheet.Range["G52"].Text = thereshold_Max_var.ToString() + "%";
+            sheet.Range["G53"].Text = thereshold_Min_var.ToString() + "%";
+
+            sheet.Range["H52"].Text = number_of_thereshold_max.ToString();
+            sheet.Range["H53"].Text = number_of_thereshold_min.ToString();
+
+            
+            #endregion
+
             Worksheet sheet_pdf = workbook.Worksheets[0];
             //string targetpdf = UrlPDF;
             sheet_pdf.SaveToPdf(UrlPDF);

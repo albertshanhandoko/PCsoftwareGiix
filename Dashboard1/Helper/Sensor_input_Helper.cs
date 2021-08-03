@@ -548,27 +548,27 @@ namespace Dashboard1.Helper
             string connectionString;
             connectionString = String.Format("server={0};port={1};user id={2}; password={3}; database={4}; SslMode={5}", IP_Address_varinput, port, user, password, database, sslM);
 
-            List<int> List_PDF_BatchID = new List<int> { };
+            int check_result = 0;
+            //List<int> List_PDF_BatchID = new List<int> { };
             using (var connection = new MySqlConnection(connectionString))
             {
-                MySqlCommand command = new MySqlCommand("Get_PrintPDF", connection);
+                MySqlCommand command = new MySqlCommand("check_pdf", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new MySqlParameter("IP_Address_Var", IP_Address_varinput));
+                command.Parameters.Add(new MySqlParameter("Batch_id_input", batch_id));
                 command.Connection.Open();
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        int curbatch_id = (Convert.ToInt32(reader["Batch_ID"]));
-                        List_PDF_BatchID.Add(curbatch_id);
+                        check_result = (Convert.ToInt32(reader["check_result"]));
+                        
                     }
 
                 }
                 command.Connection.Close();
             }
-            bool isInList = List_PDF_BatchID.IndexOf(batch_id) != -1;
 
-            return isInList;
+            return Convert.ToBoolean(check_result);
         }
     }
 }
