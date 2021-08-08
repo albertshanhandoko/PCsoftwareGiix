@@ -30,7 +30,7 @@ namespace Dashboard1
         Sql_Measure_Batch Sensor_Batch = new Sql_Measure_Batch();
 
         //string IP_Address_Input = "192.168.0."+ ((MainWindow)Application.Current.MainWindow).txtblock_sensor1.Text.Last();
-        string IP_Address_Input = "192.168.0.2"; //this is only for testing
+        string IP_Address_Input = "192.168.0.4"; //this is only for testing
         int lastbatchid = 0;
         //string IP_Address_Input = "192.168.0.9";
 
@@ -257,6 +257,26 @@ namespace Dashboard1
         }
 
         private void Error_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Average_Grid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void NumOf_TheresholdMax_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void NumOf_TheresholdMin_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txt_FinalAverage_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

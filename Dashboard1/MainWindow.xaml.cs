@@ -51,7 +51,7 @@ namespace Dashboard1
             Consumo consumo = new Consumo();
             DataContext = new ConsumoViewModel(consumo);
 
-            txt_applicationName.Text = application_name;
+            //txt_applicationName.Text = application_name;
             if(RadioButtonDefault == "0")
             {
                 RadioBtn_English.IsChecked = true;
@@ -157,7 +157,7 @@ namespace Dashboard1
             */
 
             BitmapImage src = new BitmapImage (new Uri("pack://application:,,,/Resources/Global_Instrument_Logo.jpeg", UriKind.Absolute));
-            imgDynamic.Source = src;
+            //imgDynamic.Source = src;
 
 
             txt_compname.Text = SensorHelper_2.read_config_name();
@@ -605,9 +605,14 @@ namespace Dashboard1
                 }
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
-     
+
 
     internal class ConsumoViewModel
     {

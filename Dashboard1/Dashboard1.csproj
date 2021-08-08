@@ -16,7 +16,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
     <CodeAnalysisRuleSet>..\.sonarlint\test_projectcsharp.ruleset</CodeAnalysisRuleSet>
-    <PublishUrl>D:\Publish 19 June 2021\</PublishUrl>
+    <PublishUrl>C:\Users\Ignatius Albert\Documents\Chua\080421\Published\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -408,6 +408,12 @@
     <AdditionalFiles Include="..\.sonarlint\test_project\CSharp\SonarLint.xml">
       <Link>SonarLint.xml</Link>
     </AdditionalFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\main_page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\measurement_page.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

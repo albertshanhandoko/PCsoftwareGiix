@@ -4,10 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dashboard1"
-        mc:Ignorable="d"
-        Title="Controller_View" Height="680" Width="1100" ResizeMode="CanResize" Background="#EFF2F8"
-        WindowStartupLocation="CenterScreen"
-        >
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:MetroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+        mc:Ignorable="d" Height="670" Width="1124" ResizeMode="CanMinimize" 
+        Title="Controller_View"
+        WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="{StaticResource main_page2}"></ImageBrush>
+    </Window.Background>
+
     <Window.Resources>
         <Style x:Key="BorderedItem" TargetType="ListViewItem">
             <Setter Property="Template">
@@ -82,8 +87,8 @@
 
     </Window.Resources>
     <ScrollViewer>
-        <Grid>
-            <Grid x:Name="print">
+        <Grid Height="612">
+            <Grid x:Name="print" Margin="0,0,-17,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="490"/>
@@ -96,22 +101,17 @@
 
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Aquamarine">
-                    <TextBlock Text="SENSOR 1" VerticalAlignment="Center" FontSize="20" 
-                               HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black"/>
-                </Grid>
-
                 <!-- Historical Section -->
 
-                <Grid Grid.Row="1" Grid.Column="0"  Background="#EFF2F8" >
+                <Grid Grid.Row="1" Grid.Column="0"  Background="Transparent" >
 
                     <StackPanel Margin="4,0,4,4" Orientation="Vertical" Background="Transparent">
-                        <TextBlock Text="PDF History" HorizontalAlignment="Left"  
+                        <TextBlock HorizontalAlignment="Left"  
                                    TextDecorations="Underline"
                                    VerticalAlignment="Top" Margin="5,0,0,0" FontSize="18" FontWeight="SemiBold"/>
 
-                        <DataGrid Height="400" Width="auto" 
-                             Margin="0" Padding="0,10,0,0"
+                        <DataGrid Height="212" Width="auto" 
+                             Margin="0,0,10,0" Padding="0,10,0,0"
                              x:Name="HistoryGrid1" VerticalAlignment="Top" Background="Transparent"
                                    ColumnHeaderStyle="{StaticResource HeaderStyle}"
                                   >
@@ -134,7 +134,7 @@
                         <Button Width="100" Height="25" Margin="5,15,0,5" Padding="3" 
                                 HorizontalAlignment="Left" 
                       FontSize="14" Background="#264653"  
-                      Foreground="AntiqueWhite" FontWeight="Medium"  FontFamily="calibri" Content="Link to Folder" />
+                      Foreground="Transparent" FontWeight="Medium"  FontFamily="calibri" Content="Link to Folder" />
 
 
                     </StackPanel>
@@ -144,7 +144,7 @@
 
 
                 <!-- PDF section (550) 160 390 -->
-                <Grid Grid.Row="1" Grid.Column="1" Background="#EFF2F8">
+                <Grid Grid.Row="1" Grid.Column="1" Background="Transparent" Grid.RowSpan="2">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
@@ -157,22 +157,6 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,0,0,0">
-                            <!--
-                            <Rectangle Height="30" Margin="0,0,0,0" Fill="#264653" 
-                                   Stroke="BlueViolet" RadiusY="3" RadiusX="3" >
-                                <Rectangle.Effect>
-                                    <DropShadowEffect BlurRadius="30" Color="#FFDEDEDE" 
-                                                  RenderingBias="Quality" ShadowDepth="3"/>
-                                </Rectangle.Effect>
-                                
-                            </Rectangle>
-                            -->
-                            <TextBlock Text="Data Logging" HorizontalAlignment="Left" FontStretch="Normal"
-                                       TextDecorations="Underline"
-                                       VerticalAlignment="Top" Margin="3,0,0,0" FontSize="18" FontWeight="SemiBold"/>
-                        </StackPanel>
 
 
                         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Margin="5,20,4,4" Orientation="Vertical">
@@ -342,13 +326,13 @@
                             <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                                 <StackPanel Margin="4,0,4,4" Orientation="Vertical" >
 
-                                    <DataGrid Height="220" Width="auto" 
+                                    <DataGrid Height="309" Width="auto" 
                                     Margin="0,5,0,0" Padding="0,0,0,0"
                                     Name="Average_Grid" VerticalAlignment="Stretch" 
                                               HorizontalAlignment="Stretch" Background="Transparent"
                                               ColumnHeaderHeight="30"
                                               ColumnHeaderStyle="{StaticResource HeaderStyle}"
-                                               ItemsSource="{Binding}" AutoGenerateColumns="False"
+                                               ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionChanged="Average_Grid_SelectionChanged"
                                               >
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Binding="{Binding PerBatch_ID_cls}" Header="Interval No" />
@@ -385,7 +369,7 @@
                                     <Border BorderThickness="0 0 1.2 1.2" CornerRadius="0.5" BorderBrush="White" Padding="0.5">
                                         <TextBox Width="135" Text="" IsEnabled="False" Height="30" Name="txt_FinalAverage" 
                                                  Background="Transparent" VerticalAlignment="Center" 
-                                                 TextAlignment="Center"></TextBox>
+                                                 TextAlignment="Center" TextChanged="txt_FinalAverage_TextChanged"></TextBox>
                                     </Border>
                                 </Border>
 
@@ -425,65 +409,23 @@
 
                 <!-- Error Message Start-->
 
-                <Grid Grid.Row="2" Grid.Column="0" Background="#EFF2F8">
-                    <Border  BorderBrush="Black" BorderThickness="0">
-                        <StackPanel Orientation="Vertical" Margin="2,2,2,2" >
-                            <TextBlock Text="Error Message" HorizontalAlignment="Left" FontStretch="Normal"
-                                       TextDecorations="Underline"
-                                       VerticalAlignment="Top" Margin="3,0,0,0" FontSize="15" FontWeight="SemiBold"/>
-                            <TextBox    Name="Error_TextBox" Text="test" TextWrapping="Wrap" Height="50"  
-                                        VerticalAlignment="Top" TextAlignment="Left"
-                                       AcceptsReturn="True" Margin="5,0,0,0" VerticalScrollBarVisibility="Visible" TextChanged="Error_TextBox_TextChanged"/>
-                        </StackPanel>
-                    </Border>
-
-                </Grid>
-
                 <!-- Error Message Finish -->
 
                 <!-- Thereshold Counter Start-->
-
-
-                <Grid Grid.Row="2" Grid.Column="1" Background="#EFF2F8" Margin="3,1,-3,-1">
-
-                    <StackPanel Orientation="Vertical" >
-                        <TextBlock Text="Thereshold Measure" HorizontalAlignment="Left" FontStretch="Normal"
-                                       TextDecorations="Underline"
-                                       VerticalAlignment="Top" Margin="3,0,0,0" FontSize="15" FontWeight="SemiBold"/>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label Width="35">Max:</Label>
-                            <TextBox Name="TheresholdMax_TextBox" Margin="30,0,0,0" Text="9999" Width="35" TextAlignment="Left" ></TextBox>
-
-                            <TextBox Name="NumOf_TheresholdMax_TextBox" Margin="50,0,0,0" Text="" TextAlignment="Left" Width="50">
-                                
-                            </TextBox>
-                            <Label Margin="10,0,0,0">Pcs</Label>
-
-
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label Width="35">Min:</Label>
-                            <TextBox Name="TheresholdMin_TextBox" Margin="30,0,0,0" Text="9999" Width="35" TextAlignment="Left" >
-
-                            </TextBox>
-
-                            <TextBox Name="NumOf_TheresholdMin_TextBox" Margin="50,0,0,0" Text="" TextAlignment="Left"  
-                                     Width="50"></TextBox>
-                            <Label Margin="10,0,0,0">Pcs</Label>
-
-
-                        </StackPanel>
-
-
-                    </StackPanel>
-                </Grid>
 
                 <!-- Thereshold Counter Finish-->
 
 
             </Grid>
+            <TextBox Background="White" Name="Error_TextBox" TextAlignment="Left" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="Error_TextBox_TextChanged" HorizontalAlignment="Left" Height="114" Margin="18,399,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="229"/>
+            <TextBox Background="White" x:Name="Error_TextBox_Copy" TextAlignment="Left" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="Error_TextBox_TextChanged" HorizontalAlignment="Left" Height="114" Margin="283,399,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="255"/>
+            <Label Content="Pcs" HorizontalAlignment="Left" Height="26" Margin="506,580,0,0" VerticalAlignment="Top"/>
+            <Label Content="Pcs" HorizontalAlignment="Left" Height="26" Margin="233,579,0,0" VerticalAlignment="Top"/>
+            <TextBox Name="TheresholdMax_TextBox" HorizontalAlignment="Left" Height="27" Margin="84,577,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"/>
+            <TextBox Name="TheresholdMin_TextBox" HorizontalAlignment="Left" Height="27" Margin="362,578,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+            <TextBox Name="NumOf_TheresholdMin_TextBox" HorizontalAlignment="Left" Height="27" Margin="446,578,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55"/>
+            <TextBox Name="NumOf_TheresholdMax_TextBox" HorizontalAlignment="Left" Height="27" Margin="173,578,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55"/>
+
         </Grid>
     </ScrollViewer>
 
